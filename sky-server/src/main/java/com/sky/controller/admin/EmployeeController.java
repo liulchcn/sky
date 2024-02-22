@@ -37,6 +37,53 @@ public class EmployeeController {
     private JwtProperties jwtProperties;
 
 
+    @PutMapping
+    @ApiOperation("编辑员工信息")
+    public Result update(@RequestBody EmployeeDTO employeeDTO){
+        log.info("编辑员工信息：{}",employeeDTO);
+
+       employeeService.update(employeeDTO);
+        return Result.success();
+
+    }
+
+
+    /**
+     * 查询员工
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("查找员工")
+    public Result<Employee> getById(@PathVariable Long id){
+        log.info("查找员工，id:{}",id);
+
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+    }
+
+
+    /**
+     * 启用禁用员工
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用禁用员工")
+    public Result updateStatus(@PathVariable Integer status, Long id){
+        log.info("员工id：{}，状态修改为：{}",id,status);
+
+        employeeService.updateStatus(status,id);
+
+
+        return Result.success();
+    }
+    /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
     @GetMapping("/page")
     @ApiOperation("员工分页查询")
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){

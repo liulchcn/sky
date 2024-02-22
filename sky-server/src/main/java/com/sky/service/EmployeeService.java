@@ -8,6 +8,10 @@ import com.sky.result.PageResult;
 
 public interface EmployeeService {
 
+
+
+
+
     /**
      * 员工登录
      * @param employeeLoginDTO
@@ -27,4 +31,25 @@ public interface EmployeeService {
      * @return
      */
     PageResult PageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
+     * 启用禁用员工账号
+     * @param status
+     * @param id
+     */
+    void updateStatus(Integer status, Long id);
+
+    /**
+     * 根据Id查找球员
+     * @param id
+     * @return
+     */
+    Employee getById(Long id);
+
+    /**
+     * 编辑球员信息
+     * @param employeeDTO
+     * @return
+     */
+    void update(EmployeeDTO employeeDTO);
 }
